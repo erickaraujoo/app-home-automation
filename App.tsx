@@ -1,3 +1,4 @@
+import { AuthScreen } from './src/pages/auth';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { HomeScreen } from './src/pages/home';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -21,13 +22,17 @@ const MyTheme = {
 
 const App: FC = () => (
   <NavigationContainer theme={MyTheme}>
-    <Stack.Navigator initialRouteName={'Home'}>
+    <Stack.Navigator initialRouteName={'Auth'}>
+      <Stack.Screen
+        component={AuthScreen}
+        name={'Auth'}
+        options={{ headerBackVisible: false, headerTitle: 'Autenticação' }}
+      />
+
       <Stack.Screen
         component={HomeScreen}
         name={'Home'}
-        options={{
-          headerTitle: 'Página Inicial'
-        }}
+        options={{ headerBackVisible: false, headerTitle: 'Página Inicial' }}
       />
     </Stack.Navigator>
   </NavigationContainer>
