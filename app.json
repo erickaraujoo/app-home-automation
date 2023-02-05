@@ -1,4 +1,15 @@
 {
+  "expo": {
+    "name": "Automação Residencial",
+    "slug": "app-home-automation",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "assetBundlePatterns": ["**/*"],
+    "userInterfaceStyle": "dark",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    }
+  },
   "build": {
     "preview": {
       "android": {
