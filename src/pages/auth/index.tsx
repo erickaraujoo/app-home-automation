@@ -1,6 +1,3 @@
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable react/jsx-props-no-spreading */
-
 import * as yup from 'yup';
 import {
   SafeAreaView,
@@ -11,8 +8,8 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import { ping } from '../../services/fetch/fetch.infra';
-import { resolveCatchError } from '../../utils/errors/resolve-catch-error.util';
+import { ping } from 'services/fetch/fetch.infra';
+import { resolveCatchError } from 'utils/errors/resolve-catch-error.util';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -168,6 +165,7 @@ export const AuthScreen: FC<AuthScreenProps> = ({ navigation }) => {
             placeholder={'Digite o IP...'}
             placeholderTextColor={'#f3f3f3'}
             style={styles.textInput}
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...register('ip')}
           />
 

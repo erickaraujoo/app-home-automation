@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import type { PingInput } from '../../models/arduino/ping.model';
+import type { PingInput } from 'models/arduino/ping.model';
 import type { SetArduinoPineInput } from 'models/arduino/set-arduino-pine.model';
 
 export const ping = async ({ ip }: PingInput): Promise<void> => {

@@ -1,9 +1,9 @@
-import { AuthScreen } from './src/pages/auth';
+import { AuthScreen } from 'pages/auth';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
-import { HomeScreen } from './src/pages/home';
+import { HomeScreen } from 'pages/home';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import type { FC } from 'react';
-import type { StackParamList } from './src/models/arduino/native-stack/stack-param-list.model';
+import type { StackParamList } from 'models/arduino/native-stack/stack-param-list.model';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 

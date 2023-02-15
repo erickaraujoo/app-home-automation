@@ -10,9 +10,9 @@ import {
 import Icon from 'react-native-vector-icons/Feather';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { initalValues } from '../../hooks/arduino/initial-values.hook';
-import { resolveCatchError } from '../../utils/errors/resolve-catch-error.util';
-import { setArduinoPine } from '../../services/fetch/fetch.infra';
+import { initalValues } from 'hooks/arduino/initial-values.hook';
+import { resolveCatchError } from 'utils/errors/resolve-catch-error.util';
+import { setArduinoPine } from 'services/fetch/fetch.infra';
 import { useCallback, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { FC } from 'react';
