@@ -4,10 +4,20 @@
     "slug": "app-home-automation",
     "version": "1.0.0",
     "orientation": "portrait",
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "userInterfaceStyle": "dark",
     "updates": {
       "fallbackToCacheTimeout": 0
+    },
+    "android": {
+      "package": "com.erickaraujoo.apphomeautomation"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e1165ede-a9cd-4895-a901-84774854d692"
+      }
     }
   },
   "build": {

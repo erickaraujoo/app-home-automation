@@ -1,187 +1,185 @@
-export const lamps = {
-  five: 8,
-  four: 7,
-  one: 4,
-  six: 9,
-  three: 6,
-  two: 5
-};
-
-export const addresses = {
+export const arduinoAddresses = {
   one: 8,
   three: 12,
   two: 10
 };
 
-export const initalValues = [
+type InitialValues = {
+  description: string;
+  id: number;
+  pines: {
+    address: number;
+    id: number;
+    name: string;
+    value: number;
+    status: number;
+  }[];
+}[];
+
+export const initalValues: InitialValues = [
   {
     description: 'Garagem',
     id: 1,
-    name: 'garage',
     pines: [
       {
-        address: addresses.two,
+        address: arduinoAddresses.two,
         id: 1,
         name: 'L12',
-        value: lamps.six
+        status: 0,
+        value: 9
       },
       {
-        address: addresses.three,
+        address: arduinoAddresses.two,
         id: 2,
         name: 'L13',
-        value: lamps.one
+        status: 0,
+        value: 10
       },
       {
-        address: addresses.three,
+        address: arduinoAddresses.two,
         id: 3,
         name: 'L14',
-        value: lamps.two
+        status: 0,
+        value: 11
       },
       {
-        address: addresses.three,
+        address: arduinoAddresses.two,
         id: 4,
         name: 'L15',
-        value: lamps.three
+        status: 0,
+        value: 12
       }
     ]
   },
   {
     description: 'Corredor Externo',
     id: 2,
-    name: 'external-hall',
     pines: [
       {
-        address: addresses.three,
+        address: arduinoAddresses.three,
         id: 1,
         name: 'L16',
-        value: lamps.four
-      },
-      {
-        address: addresses.three,
-        id: 2,
-        name: 'L17',
-        value: lamps.five
-      },
-      {
-        address: addresses.three,
-        id: 3,
-        name: 'L18',
-        value: lamps.six
+        status: 0,
+        value: 10
       }
     ]
   },
   {
     description: 'Corredor Interno',
     id: 3,
-    name: 'internal-hall',
     pines: [
       {
-        address: addresses.one,
+        address: arduinoAddresses.one,
         id: 1,
-        name: 'L4',
-        value: lamps.four
+        name: 'L04',
+        status: 0,
+        value: 9
       },
       {
-        address: addresses.one,
+        address: arduinoAddresses.one,
         id: 2,
-        name: 'L6',
-        value: lamps.six
+        name: 'L06',
+        status: 0,
+        value: 11
       },
       {
-        address: addresses.two,
+        address: arduinoAddresses.two,
         id: 3,
-        name: 'L8',
-        value: lamps.two
+        name: 'L08',
+        status: 0,
+        value: 5
       },
       {
-        address: addresses.two,
+        address: arduinoAddresses.two,
         id: 4,
         name: 'L10',
-        value: lamps.four
+        status: 0,
+        value: 7
       }
     ]
   },
   {
     description: 'Sala de Estar',
     id: 4,
-    name: 'living-room',
     pines: [
       {
-        address: addresses.two,
+        address: arduinoAddresses.two,
         id: 1,
         name: 'L11',
-        value: lamps.five
+        status: 0,
+        value: 8
       }
     ]
   },
   {
     description: 'Banheiro',
     id: 5,
-    name: 'bathroom',
     pines: [
       {
-        address: addresses.two,
+        address: arduinoAddresses.two,
         id: 1,
         name: 'L09',
-        value: lamps.three
+        status: 0,
+        value: 6
       }
     ]
   },
   {
     description: 'Cozinha',
     id: 6,
-    name: 'kitchen',
     pines: [
       {
-        address: addresses.two,
+        address: arduinoAddresses.one,
         id: 1,
         name: 'L07',
-        value: lamps.one
+        status: 0,
+        value: 12
       }
     ]
   },
   {
     description: 'Quarto',
     id: 7,
-    name: 'room',
     pines: [
       {
-        address: addresses.one,
+        address: arduinoAddresses.one,
         id: 1,
         name: 'L05',
-        value: lamps.five
+        status: 0,
+        value: 10
       }
     ]
   },
   {
     description: 'Banheiro Suíte',
     id: 8,
-    name: 'bathroom-suit',
     pines: [
       {
-        address: addresses.one,
+        address: arduinoAddresses.one,
         id: 1,
         name: 'L03',
-        value: lamps.three
+        status: 0,
+        value: 8
       }
     ]
   },
   {
     description: 'Quarto Suíte',
     id: 9,
-    name: 'room-suit',
     pines: [
       {
-        address: addresses.one,
+        address: arduinoAddresses.one,
         id: 1,
         name: 'L01',
-        value: lamps.one
+        status: 0,
+        value: 6
       },
       {
-        address: addresses.one,
+        address: arduinoAddresses.one,
         id: 2,
         name: 'L02',
-        value: lamps.two
+        status: 0,
+        value: 7
       }
     ]
   }

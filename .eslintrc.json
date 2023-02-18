@@ -102,7 +102,15 @@
     "@typescript-eslint/no-magic-numbers": "error",
     "@typescript-eslint/no-meaningless-void-operator": "off",
     "@typescript-eslint/no-misused-new": "error",
-    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": {
+          "arguments": true,
+          "attributes": false
+        }
+      }
+    ],
     "@typescript-eslint/no-namespace": "error",
     "@typescript-eslint/no-non-null-asserted-nullish-coalescing": "error",
     "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
@@ -801,6 +809,25 @@
     "yield-star-spacing": "error",
     "yoda": ["error", "never", { "exceptRange": true }]
   },
+  "overrides": [
+    {
+      "files": "**/*.d.ts",
+      "rules": {
+        "spaced-comment": "off"
+      }
+    },
+    {
+      "files": ["**/*.spec.ts", "**/*.test.ts", "test/*", "tests/*"],
+      "rules": {
+        "no-undef": "off",
+        "init-declarations": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-argument": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/unbound-method": "off"
+      }
+    }
+  ],
   "settings": {
     "flowtype": {
       "onlyFilesWithFlowAnnotation": false
@@ -819,7 +846,9 @@
   "ignorePatterns": [
     "*.log",
     "*.local",
-    "*.spec.ts",
+    "*.config.js",
+    "*.json",
+    "**/migrations/*",
     "/build/**",
     "/coverage/**",
     "/dist/**",
@@ -827,8 +856,6 @@
     "/logs/**",
     "/log/**",
     "/templates/**",
-    "/tests/**",
-    "/test/**",
     "/tmp/**",
     "/node_modules"
   ]

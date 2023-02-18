@@ -1,24 +1,112 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "allowJs": false,
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": "src",
-    "esModuleInterop": false,
+    /* Projects */
+    "incremental": true,
+    "composite": true,
+    "tsBuildInfoFile": "./.tsbuildinfo",
+    "disableSourceOfProjectReferenceRedirect": true,
+    "disableSolutionSearching": true,
+    "disableReferencedProjectLoad": true,
+
+    /* Language and Environment */
+    "target": "ESNext",
+    "lib": ["DOM", "ESNext"],
+    "jsx": "react-native",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "jsx": "react-native",
-    "lib": ["DOM", "ESNext"],
+    "jsxFactory": "",
+    "jsxFragmentFactory": "",
+    "jsxImportSource": "",
+    "reactNamespace": "",
+    "noLib": false,
+    "useDefineForClassFields": true,
+    "moduleDetection": "auto",
+
+    /* Modules */
     "module": "ESNext",
-    "moduleResolution": "Node",
-    "noEmit": true,
-    "noFallthroughCasesInSwitch": true,
+    "rootDir": "",
+    "moduleResolution": "nodenext",
+    "baseUrl": "src",
+    "paths": {},
+    "rootDirs": [],
+    "typeRoots": [],
+    "types": [],
+    "allowUmdGlobalAccess": true,
+    "moduleSuffixes": [],
     "resolveJsonModule": true,
-    "skipLibCheck": false,
+    "noResolve": false,
+
+    /* JavaScript Support */
+    "allowJs": false,
+    "checkJs": false,
+
+    /* Emit */
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": false,
+    "sourceMap": true,
+    "removeComments": true,
+    "noEmit": true,
+    "importHelpers": true,
+    "importsNotUsedAsValues": "remove",
+    "downlevelIteration": true,
+    "sourceRoot": "",
+    "mapRoot": "",
+    "inlineSourceMap": false,
+    "inlineSources": true,
+    "emitBOM": true,
+    "newLine": "lf",
+    "stripInternal": true,
+    "noEmitHelpers": true,
+    "noEmitOnError": true,
+    "preserveConstEnums": true,
+    "preserveValueImports": false,
+
+    /* Interop Constraints */
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "preserveSymlinks": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
     "strict": true,
-    "target": "ESNext",
-    "useDefineForClassFields": true
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+
+    /* Completeness */
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": false,
+
+    /* Editor Support */
+    "plugins": [],
+
+    /* Backwards Compatibility */
+    "noStrictGenericChecks": false,
+    "suppressExcessPropertyErrors": false,
+    "suppressImplicitAnyIndexErrors": false,
+
+    /* Compiler Diagnostics */
+    "traceResolution": true,
+
+    /* Output Formatting */
+    "noErrorTruncation": true
   }
 }

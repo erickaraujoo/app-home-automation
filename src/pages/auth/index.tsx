@@ -1,100 +1,17 @@
-import * as yup from 'yup';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-  ToastAndroid,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { SafeAreaView, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native';
+import { asyncStorageKeys } from 'config/constants';
+import { authSchema } from 'utils/validators/schemas/arduino.schema';
 import { ping } from 'services/fetch/fetch.infra';
 import { resolveCatchError } from 'utils/errors/resolve-catch-error.util';
+import { styles } from './styles';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import type { AuthFormModel } from 'models/form/auth.form.model';
+import type { AuthScreenProps } from 'models/props/auth.props.model';
 import type { FC } from 'react';
-import type { StackNavigation } from 'models/arduino/native-stack/stack-param-list.model';
 import type { SubmitHandler } from 'react-hook-form';
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'flex-start',
-    paddingBottom: 56,
-    paddingHorizontal: 20,
-    paddingTop: 72
-  },
-  errorText: {
-    color: '#CE3036',
-    fontSize: 12,
-    paddingTop: 12
-  },
-  form: {
-    alignItems: 'flex-start',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    marginTop: 56
-  },
-  safeAreaView: {
-    flex: 1
-  },
-  subtitle: {
-    color: '#f3f3f3',
-    fontSize: 16,
-    lineHeight: 25,
-    marginTop: 32,
-    textAlign: 'center'
-  },
-  text: {
-    color: '#f3f3f3',
-    fontSize: 18,
-    paddingVertical: 24
-  },
-  textInput: {
-    alignSelf: 'stretch',
-    backgroundColor: '#313136',
-    color: '#f3f3f3',
-    fontSize: 18,
-    padding: 16,
-    textShadowColor: 'white'
-  },
-  title: {
-    color: '#f3f3f3',
-    fontSize: 26,
-    textAlign: 'center',
-    width: '100%'
-  },
-  touchableOpacity: {
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    backgroundColor: '#005CA9',
-    borderRadius: 4,
-    fontSize: 16,
-    marginVertical: 56,
-    padding: 16
-  },
-  touchableOpacityText: {
-    color: '#f3f3f3',
-    fontSize: 16,
-    textAlign: 'center',
-    textTransform: 'uppercase'
-  }
-});
-
-const schema = yup.object().shape({
-  ip: yup.string().required('IP é obrigatório')
-});
-
-interface Detail {
-  ip: string;
-}
-
-export interface AuthScreenProps {
-  navigation: StackNavigation;
-}
 
 export const AuthScreen: FC<AuthScreenProps> = ({ navigation }) => {
   const {
@@ -103,20 +20,55 @@ export const AuthScreen: FC<AuthScreenProps> = ({ navigation }) => {
     setValue,
     clearErrors,
     formState: { errors }
-  } = useForm<Detail>({
+  } = useForm<AuthFormModel>({
     mode: 'onBlur',
-    resolver: yupResolver(schema)
+    resolver: yupResolver(authSchema)
   });
 
   const [loadingScreen, setLoadingScreen] = useState<boolean>(false);
 
-  const onSubmit: SubmitHandler<Detail> = async ({ ip }): Promise<void> => {
+  const checkAsyncStorageIp = useCallback(async (): Promise<void> => {
+    const ip = await AsyncStorage.getItem(asyncStorageKeys.ip);
+
+    if (ip === null) return;
+
+    await AsyncStorage.removeItem(asyncStorageKeys.ip);
+    await AsyncStorage.removeItem('@data');
+
     setLoadingScreen(true);
 
     try {
-      await ping({ ip });
+      const data = await ping({ ip });
 
-      await AsyncStorage.setItem('@ip', ip);
+      await AsyncStorage.setItem(asyncStorageKeys.ip, ip);
+      await AsyncStorage.setItem('@data', JSON.stringify(data));
+
+      navigation.push('Home');
+    } catch (error) {
+      if (error instanceof Error && error.message === 'Aborted')
+        ToastAndroid.showWithGravity(
+          'Endereço IP não encontrado',
+          ToastAndroid.SHORT,
+          ToastAndroid.CENTER
+        );
+      else resolveCatchError(error);
+    } finally {
+      setLoadingScreen(false);
+    }
+  }, [navigation]);
+
+  useEffect(() => {
+    checkAsyncStorageIp();
+  }, [checkAsyncStorageIp]);
+
+  const onSubmit: SubmitHandler<AuthFormModel> = async ({ ip }): Promise<void> => {
+    setLoadingScreen(true);
+
+    try {
+      const data = await ping({ ip });
+
+      await AsyncStorage.setItem(asyncStorageKeys.ip, ip);
+      await AsyncStorage.setItem('@data', JSON.stringify(data));
 
       navigation.push('Home');
     } catch (error) {
@@ -132,17 +84,7 @@ export const AuthScreen: FC<AuthScreenProps> = ({ navigation }) => {
     }
   };
 
-  const checkAsyncStorageIp = useCallback(async (): Promise<void> => {
-    const hasIp = await AsyncStorage.getItem('@ip');
-
-    if (hasIp !== null) navigation.push('Home');
-  }, [navigation]);
-
   const handleTouchableOpacityText = loadingScreen ? 'Carregando...' : 'Conectar';
-
-  useEffect(() => {
-    checkAsyncStorageIp();
-  }, [checkAsyncStorageIp]);
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
